@@ -46,9 +46,9 @@
         android:layout_below="@+id/textView_app_name"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif"
-        android:text="#internetrights"
+        android:text="Liberate yourself by bypassing restrictions"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault"
-        android:visibility="invisible"
+        android:textColor="@color/cardview_light_background"
         app:layout_marginTopPercent="5%" />
     <Button
             android:text="@string/button_text_activate"
