@@ -11,14 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.ConfigActivity;
 import org.itxtech.daedalus.util.server.CustomDNSServer;
 import org.itxtech.daedalus.util.server.DNSServerHelper;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -45,8 +45,8 @@ public class DNSServersFragment extends ToolbarFragment {
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
                 if (viewHolder instanceof ViewHolder) {
                     int index = ((ViewHolder) viewHolder).getIndex();
-                    if (index < Daedalus.configurations.getCustomDNSServers().size() &&
-                            DNSServerHelper.isInUsing(Daedalus.configurations.getCustomDNSServers().get(index))) {
+                    if (index < Liberatio.configurations.getCustomDNSServers().size() &&
+                            DNSServerHelper.isInUsing(Liberatio.configurations.getCustomDNSServers().get(index))) {
                         return 0;
                     }
                 }
@@ -61,8 +61,8 @@ public class DNSServersFragment extends ToolbarFragment {
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                server = Daedalus.configurations.getCustomDNSServers().get(position);
-                Daedalus.configurations.getCustomDNSServers().remove(position);
+                server = Liberatio.configurations.getCustomDNSServers().get(position);
+                Liberatio.configurations.getCustomDNSServers().remove(position);
                 Snackbar.make(view, R.string.action_removed, Snackbar.LENGTH_LONG)
                         .setAction(R.string.action_undo, new SnackbarClickListener(position)).show();
                 adapter.notifyItemRemoved(position);
@@ -98,7 +98,7 @@ public class DNSServersFragment extends ToolbarFragment {
 
         @Override
         public void onClick(View v) {
-            Daedalus.configurations.getCustomDNSServers().add(position, server);
+            Liberatio.configurations.getCustomDNSServers().add(position, server);
             adapter.notifyItemInserted(position);
         }
     }
@@ -107,7 +107,7 @@ public class DNSServersFragment extends ToolbarFragment {
     public void onDestroyView() {
         super.onDestroyView();
 
-        Daedalus.configurations.save();
+        Liberatio.configurations.save();
         adapter = null;
         server = null;
     }
@@ -122,7 +122,7 @@ public class DNSServersFragment extends ToolbarFragment {
     private class DNSServerAdapter extends RecyclerView.Adapter<ViewHolder> {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            CustomDNSServer server = Daedalus.configurations.getCustomDNSServers().get(position);
+            CustomDNSServer server = Liberatio.configurations.getCustomDNSServers().get(position);
             holder.setIndex(position);
             holder.textViewName.setText(server.getName());
             holder.textViewAddress.setText(server.getAddress() + ":" + server.getPort());
@@ -130,7 +130,7 @@ public class DNSServersFragment extends ToolbarFragment {
 
         @Override
         public int getItemCount() {
-            return Daedalus.configurations.getCustomDNSServers().size();
+            return Liberatio.configurations.getCustomDNSServers().size();
         }
 
         @Override
@@ -162,8 +162,8 @@ public class DNSServersFragment extends ToolbarFragment {
 
         @Override
         public void onClick(View v) {
-            if (!DNSServerHelper.isInUsing(Daedalus.configurations.getCustomDNSServers().get(index))) {
-                Daedalus.getInstance().startActivity(new Intent(Daedalus.getInstance(), ConfigActivity.class)
+            if (!DNSServerHelper.isInUsing(Liberatio.configurations.getCustomDNSServers().get(index))) {
+                Liberatio.getInstance().startActivity(new Intent(Liberatio.getInstance(), ConfigActivity.class)
                         .putExtra(ConfigActivity.LAUNCH_ACTION_ID, index)
                         .putExtra(ConfigActivity.LAUNCH_ACTION_FRAGMENT, ConfigActivity.LAUNCH_FRAGMENT_DNS_SERVER)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

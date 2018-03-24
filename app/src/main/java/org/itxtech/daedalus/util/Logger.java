@@ -1,7 +1,7 @@
 package org.itxtech.daedalus.util;
 
 import android.util.Log;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -66,7 +66,7 @@ public class Logger {
     }
 
     private static int getLogSizeLimit() {
-        return Integer.parseInt(Daedalus.getPrefs().getString("settings_log_size", "10000"));
+        return Integer.parseInt(Liberatio.getPrefs().getString("settings_log_size", "10000"));
     }
 
     private static boolean checkBufferSize() {
@@ -89,7 +89,7 @@ public class Logger {
                 String fileDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss ").format(new Date());
                 buffer.insert(0, "\n").insert(0, message).insert(0, fileDateFormat);
             }
-            Log.d("Daedalus", message);
+            Log.d("Liberatio", message);
         } catch (Exception e) {
             e.printStackTrace();
         }

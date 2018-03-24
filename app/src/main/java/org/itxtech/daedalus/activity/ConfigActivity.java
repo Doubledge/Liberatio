@@ -10,14 +10,14 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.fragment.ConfigFragment;
 import org.itxtech.daedalus.fragment.DNSServerConfigFragment;
 import org.itxtech.daedalus.fragment.RuleConfigFragment;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -37,7 +37,7 @@ public class ConfigActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (Daedalus.isDarkTheme()) {
+        if (Liberatio.isDarkTheme()) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
         }
         super.onCreate(savedInstanceState);
@@ -98,6 +98,6 @@ public class ConfigActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        Daedalus.configurations.save();
+        Liberatio.configurations.save();
     }
 }

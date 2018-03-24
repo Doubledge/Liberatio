@@ -1,10 +1,10 @@
 package org.itxtech.daedalus.util.server;
 
 import android.content.Context;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -41,6 +41,6 @@ public class DNSServer extends AbstractDNSServer {
 
     @Override
     public String getName() {
-        return getStringDescription(Daedalus.getInstance());
+        return getStringDescription(Liberatio.getInstance());
     }
 }

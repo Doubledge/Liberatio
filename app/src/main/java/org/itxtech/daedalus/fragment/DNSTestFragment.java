@@ -13,7 +13,7 @@ import de.measite.minidns.DNSMessage;
 import de.measite.minidns.Question;
 import de.measite.minidns.Record;
 import de.measite.minidns.source.NetworkDataSource;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.util.Logger;
 import org.itxtech.daedalus.util.server.AbstractDNSServer;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -98,7 +98,7 @@ public class DNSTestFragment extends ToolbarFragment {
         spinnerType.setAdapter(typeAdapter);
 
         final AutoCompleteTextView textViewTestDomain = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView_test_url);
-        ArrayAdapter autoCompleteArrayAdapter = new ArrayAdapter<>(Daedalus.getInstance(), android.R.layout.simple_list_item_1, Daedalus.DEFAULT_TEST_DOMAINS);
+        ArrayAdapter autoCompleteArrayAdapter = new ArrayAdapter<>(Liberatio.getInstance(), android.R.layout.simple_list_item_1, Liberatio.DEFAULT_TEST_DOMAINS);
         textViewTestDomain.setAdapter(autoCompleteArrayAdapter);
 
         mRunnable = new Runnable() {
@@ -107,12 +107,12 @@ public class DNSTestFragment extends ToolbarFragment {
                 try {
                     String testDomain = textViewTestDomain.getText().toString();
                     if (testDomain.equals("")) {
-                        testDomain = Daedalus.DEFAULT_TEST_DOMAINS[0];
+                        testDomain = Liberatio.DEFAULT_TEST_DOMAINS[0];
                     }
                     StringBuilder testText = new StringBuilder();
                     ArrayList<AbstractDNSServer> dnsServers = new ArrayList<AbstractDNSServer>() {{
                         add(((AbstractDNSServer) spinnerServerChoice.getSelectedItem()));
-                        String servers = Daedalus.getPrefs().getString("dns_test_servers", "");
+                        String servers = Liberatio.getPrefs().getString("dns_test_servers", "");
                         if (!servers.equals("")) {
                             for (String server : servers.split(",")) {
                                 if (server.contains(".") && server.contains(":")) {//IPv4
@@ -205,7 +205,7 @@ public class DNSTestFragment extends ToolbarFragment {
                         .setAction("Action", null).show();*/
                 startTestBut.setEnabled(false);
 
-                InputMethodManager imm = (InputMethodManager) Daedalus.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+                InputMethodManager imm = (InputMethodManager) Liberatio.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
                 textViewTestInfo.setText("");

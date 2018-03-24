@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.ConfigActivity;
 import org.itxtech.daedalus.service.DaedalusVpnService;
@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -41,16 +41,16 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
 
     private ArrayList<Rule> getRules() {
         if (currentType == Rule.TYPE_HOSTS) {
-            return Daedalus.configurations.getHostsRules();
+            return Liberatio.configurations.getHostsRules();
         } else {
-            return Daedalus.configurations.getDnsmasqRules();
+            return Liberatio.configurations.getDnsmasqRules();
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_rules, container, false);
-        currentType = Daedalus.configurations.getUsingRuleType();
+        currentType = Liberatio.configurations.getUsingRuleType();
 
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView_rules);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
@@ -60,7 +60,7 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
             public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-                if (!Daedalus.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
+                if (!Liberatio.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
                     if (viewHolder instanceof RulesFragment.ViewHolder) {
                         Rule rule = Rule.getRuleById(((ViewHolder) viewHolder).getId());
                         if (rule != null && rule.isServiceAndUsing()) {
@@ -125,10 +125,10 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
         }
 
         if (id == R.id.action_reload) {
-            if (!Daedalus.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
+            if (!Liberatio.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
                 Snackbar.make(getView(), R.string.notice_check_dynamic_rule_reload, Snackbar.LENGTH_SHORT).show();
             } else {
-                Daedalus.setRulesChanged();
+                Liberatio.setRulesChanged();
             }
         }
         return true;
@@ -138,7 +138,7 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
     public void onDestroyView() {
         super.onDestroyView();
 
-        Daedalus.configurations.save();
+        Liberatio.configurations.save();
         adapter = null;
         rule = null;
     }
@@ -160,9 +160,9 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
         @Override
         public void onClick(View v) {
             if (rule.getType() == Rule.TYPE_HOSTS) {
-                Daedalus.configurations.getHostsRules().add(position, rule);
+                Liberatio.configurations.getHostsRules().add(position, rule);
             } else if (rule.getType() == Rule.TYPE_DNAMASQ) {
-                Daedalus.configurations.getDnsmasqRules().add(position, rule);
+                Liberatio.configurations.getDnsmasqRules().add(position, rule);
             }
             if (currentType == rule.getType()) {
                 adapter.notifyItemInserted(position);
@@ -178,7 +178,7 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
             holder.textViewName.setText(rule.getName());
             holder.textViewAddress.setText(rule.getFileName());
 
-            File file = new File(Daedalus.rulePath + rule.getFileName());
+            File file = new File(Liberatio.rulePath + rule.getFileName());
             StringBuilder builder = new StringBuilder();
             if (file.exists()) {
                 builder.append(new DecimalFormat("0.00").format(((float) file.length() / 1024)));
@@ -215,7 +215,7 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
             textViewSize = view.findViewById(R.id.textView_rule_size);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
-            if (Daedalus.isDarkTheme()) {
+            if (Liberatio.isDarkTheme()) {
                 view.findViewById(R.id.cardView_indicator).setBackgroundResource(R.drawable.bg_selectable_dark);
             } else {
                 view.findViewById(R.id.cardView_indicator).setBackgroundResource(R.drawable.bg_selectable);
@@ -236,14 +236,14 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
 
         @Override
         public void onClick(View v) {
-            if ((!Daedalus.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false) &&
+            if ((!Liberatio.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false) &&
                     !DaedalusVpnService.isActivated()) ||
-                    Daedalus.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
+                    Liberatio.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false)) {
                 Rule rule = Rule.getRuleById(id);
                 if (rule != null) {
                     rule.setUsing(!v.isSelected());
                     v.setSelected(!v.isSelected());
-                    Daedalus.setRulesChanged();
+                    Liberatio.setRulesChanged();
                 }
             }
         }
@@ -252,9 +252,9 @@ public class RulesFragment extends ToolbarFragment implements Toolbar.OnMenuItem
         public boolean onLongClick(View v) {
             Rule rule = Rule.getRuleById(id);
             if (rule != null &&
-                    (Daedalus.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false) ||
+                    (Liberatio.getPrefs().getBoolean("settings_allow_dynamic_rule_reload", false) ||
                             !rule.isServiceAndUsing())) {
-                Daedalus.getInstance().startActivity(new Intent(Daedalus.getInstance(), ConfigActivity.class)
+                Liberatio.getInstance().startActivity(new Intent(Liberatio.getInstance(), ConfigActivity.class)
                         .putExtra(ConfigActivity.LAUNCH_ACTION_ID, Integer.parseInt(id))
                         .putExtra(ConfigActivity.LAUNCH_ACTION_FRAGMENT, ConfigActivity.LAUNCH_FRAGMENT_RULE)
                         .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));

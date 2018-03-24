@@ -11,13 +11,13 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import org.itxtech.daedalus.BuildConfig;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 
 import java.util.Locale;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -35,7 +35,7 @@ public class AboutFragment extends ToolbarFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
 
-        mWebView = new WebView(Daedalus.getInstance());
+        mWebView = new WebView(Liberatio.getInstance());
         ((ViewGroup) view.findViewById(R.id.fragment_about)).addView(mWebView);
 
         mWebView.getSettings().setJavaScriptEnabled(true);
@@ -66,7 +66,7 @@ public class AboutFragment extends ToolbarFragment {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 try {
-                    mWebView.loadUrl("javascript:changeVersionInfo('" + Daedalus.getInstance().getPackageManager().getPackageInfo(Daedalus.getInstance().getPackageName(), 0).versionName + "', '" + BuildConfig.BUILD_TIME + "', '" + BuildConfig.GIT_COMMIT + "')");
+                    mWebView.loadUrl("javascript:changeVersionInfo('" + Liberatio.getInstance().getPackageManager().getPackageInfo(Liberatio.getInstance().getPackageName(), 0).versionName + "', '" + BuildConfig.BUILD_TIME + "', '" + BuildConfig.GIT_COMMIT + "')");
                 } catch (Exception e) {
                     Log.e("DAboutActivity", e.toString());
                 }

@@ -1,9 +1,9 @@
 package org.itxtech.daedalus.util.server;
 
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -20,7 +20,7 @@ public class CustomDNSServer extends AbstractDNSServer {
     public CustomDNSServer(String name, String address, int port) {
         super(address, port);
         this.name = name;
-        this.id = String.valueOf(Daedalus.configurations.getNextDnsId());
+        this.id = String.valueOf(Liberatio.configurations.getNextDnsId());
     }
 
     public String getId() {

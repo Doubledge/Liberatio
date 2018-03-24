@@ -1,13 +1,13 @@
 package org.itxtech.daedalus.util;
 
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.service.DaedalusVpnService;
 
 import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -35,7 +35,7 @@ public class Rule {
         this.downloadUrl = downloadUrl;
         this.using = false;
         if (withId) {
-            this.id = String.valueOf(Daedalus.configurations.getNextRuleId());
+            this.id = String.valueOf(Liberatio.configurations.getNextRuleId());
         }
     }
 
@@ -55,11 +55,11 @@ public class Rule {
         this.using = using;
         if (using) {
             if (type == TYPE_HOSTS) {
-                for (Rule rule : Daedalus.configurations.getDnsmasqRules()) {
+                for (Rule rule : Liberatio.configurations.getDnsmasqRules()) {
                     rule.setUsing(false);
                 }
             } else if (type == TYPE_DNAMASQ) {
-                for (Rule rule : Daedalus.configurations.getHostsRules()) {
+                for (Rule rule : Liberatio.configurations.getHostsRules()) {
                     rule.setUsing(false);
                 }
             }
@@ -110,17 +110,17 @@ public class Rule {
 
     public void addToConfig() {
         if (getType() == Rule.TYPE_HOSTS) {
-            Daedalus.configurations.getHostsRules().add(this);
+            Liberatio.configurations.getHostsRules().add(this);
         } else if (getType() == Rule.TYPE_DNAMASQ) {
-            Daedalus.configurations.getDnsmasqRules().add(this);
+            Liberatio.configurations.getDnsmasqRules().add(this);
         }
     }
 
     public void removeFromConfig() {
         if (getType() == Rule.TYPE_HOSTS) {
-            Daedalus.configurations.getHostsRules().remove(this);
+            Liberatio.configurations.getHostsRules().remove(this);
         } else if (getType() == Rule.TYPE_DNAMASQ) {
-            Daedalus.configurations.getDnsmasqRules().remove(this);
+            Liberatio.configurations.getDnsmasqRules().remove(this);
         }
         File file = new File(getFileName());
         Logger.info("Delete rule " + getName() + " result: " + String.valueOf(file.delete()));
@@ -129,8 +129,8 @@ public class Rule {
 
     //STATIC METHODS
     public static String[] getBuildInRuleNames() {
-        ArrayList<String> names = new ArrayList<>(Daedalus.RULES.size());
-        for (Rule rule : Daedalus.RULES) {
+        ArrayList<String> names = new ArrayList<>(Liberatio.RULES.size());
+        for (Rule rule : Liberatio.RULES) {
             names.add(rule.getName() + " - " + getTypeById(rule.getType()));
         }
         String[] strings = new String[names.size()];
@@ -138,8 +138,8 @@ public class Rule {
     }
 
     public static String[] getBuildInRuleEntries() {
-        ArrayList<String> entries = new ArrayList<>(Daedalus.RULES.size());
-        for (int i = 0; i < Daedalus.RULES.size(); i++) {
+        ArrayList<String> entries = new ArrayList<>(Liberatio.RULES.size());
+        for (int i = 0; i < Liberatio.RULES.size(); i++) {
             entries.add(String.valueOf(i));
         }
         String[] strings = new String[entries.size()];
@@ -147,12 +147,12 @@ public class Rule {
     }
 
     public static Rule getRuleById(String id) {
-        for (Rule rule : Daedalus.configurations.getHostsRules()) {
+        for (Rule rule : Liberatio.configurations.getHostsRules()) {
             if (rule.getId().equals(id)) {
                 return rule;
             }
         }
-        for (Rule rule : Daedalus.configurations.getDnsmasqRules()) {
+        for (Rule rule : Liberatio.configurations.getDnsmasqRules()) {
             if (rule.getId().equals(id)) {
                 return rule;
             }

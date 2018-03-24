@@ -9,7 +9,7 @@ import android.view.View;
 import org.itxtech.daedalus.R;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org

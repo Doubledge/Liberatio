@@ -8,14 +8,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.util.Logger;
 
 import java.io.FileWriter;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -44,7 +44,7 @@ public class LogFragment extends ToolbarFragment implements Toolbar.OnMenuItemCl
 
     private void export() {
         try {
-            String file = Daedalus.logPath + String.valueOf(System.currentTimeMillis()) + ".log";
+            String file = Liberatio.logPath + String.valueOf(System.currentTimeMillis()) + ".log";
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(Logger.getLog());
             fileWriter.close();

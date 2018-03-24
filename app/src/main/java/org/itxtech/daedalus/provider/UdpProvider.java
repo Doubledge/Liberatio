@@ -11,7 +11,7 @@ import de.measite.minidns.DNSMessage;
 import de.measite.minidns.Record;
 import de.measite.minidns.record.A;
 import de.measite.minidns.record.AAAA;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.service.DaedalusVpnService;
 import org.itxtech.daedalus.util.Logger;
 import org.itxtech.daedalus.util.RuleResolver;
@@ -29,7 +29,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -217,7 +217,7 @@ public class UdpProvider extends Provider {
      * @param responsePayload The payload of the response
      */
     void handleDnsResponse(IpPacket requestPacket, byte[] responsePayload) {
-        if (Daedalus.getPrefs().getBoolean("settings_debug_output", false)) {
+        if (Liberatio.getPrefs().getBoolean("settings_debug_output", false)) {
             try {
                 Logger.debug(new DNSMessage(responsePayload).toString());
             } catch (IOException e) {
@@ -310,7 +310,7 @@ public class UdpProvider extends Provider {
         DNSMessage dnsMsg;
         try {
             dnsMsg = new DNSMessage(dnsRawData);
-            if (Daedalus.getPrefs().getBoolean("settings_debug_output", false)) {
+            if (Liberatio.getPrefs().getBoolean("settings_debug_output", false)) {
                 Logger.debug(dnsMsg.toString());
             }
         } catch (IOException e) {

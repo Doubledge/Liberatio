@@ -2,19 +2,18 @@ package org.itxtech.daedalus.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.MainActivity;
 import org.itxtech.daedalus.service.DaedalusVpnService;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -35,7 +34,7 @@ public class HomeFragment extends ToolbarFragment {
             @Override
             public void onClick(View v) {
                 if (DaedalusVpnService.isActivated()) {
-                    Daedalus.deactivateService(getActivity().getApplicationContext());
+                    Liberatio.deactivateService(getActivity().getApplicationContext());
                 } else {
                     startActivity(new Intent(getActivity(), MainActivity.class)
                             .putExtra(MainActivity.LAUNCH_ACTION, MainActivity.LAUNCH_ACTION_ACTIVATE));

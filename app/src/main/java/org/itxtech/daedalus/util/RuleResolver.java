@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org

@@ -18,7 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.ConfigActivity;
 import org.itxtech.daedalus.util.Logger;
@@ -30,7 +30,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -55,7 +55,7 @@ public class RuleConfigFragment extends ConfigFragment {
     public void onDestroy() {
         super.onDestroy();
 
-        Daedalus.configurations.save();
+        Liberatio.configurations.save();
         stopThread();
         intent = null;
         mHandler.shutdown();
@@ -193,7 +193,7 @@ public class RuleConfigFragment extends ConfigFragment {
         ruleImportBuildIn.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                Rule rule = Daedalus.RULES.get(Integer.parseInt((String) newValue));
+                Rule rule = Liberatio.RULES.get(Integer.parseInt((String) newValue));
                 ruleName.setText(rule.getName());
                 ruleName.setSummary(rule.getName());
                 ruleType.setValue(String.valueOf(rule.getType()));
@@ -273,9 +273,9 @@ public class RuleConfigFragment extends ConfigFragment {
                 try {
                     getActivity().getContentResolver().takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
-                    String file = System.currentTimeMillis() + ".dr";//Daedalus Rule
+                    String file = System.currentTimeMillis() + ".dr";//Liberatio Rule
                     InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-                    OutputStream outputStream = new FileOutputStream(Daedalus.rulePath + file);
+                    OutputStream outputStream = new FileOutputStream(Liberatio.rulePath + file);
                     byte[] b = new byte[1024];
                     while ((inputStream.read(b)) != -1) {
                         outputStream.write(b);
@@ -400,7 +400,7 @@ public class RuleConfigFragment extends ConfigFragment {
                 case MSG_RULE_DOWNLOADED:
                     try {
                         RuleData ruleData = (RuleData) msg.obj;
-                        File file = new File(Daedalus.rulePath + ruleData.getFilename());
+                        File file = new File(Liberatio.rulePath + ruleData.getFilename());
                         FileOutputStream stream = new FileOutputStream(file);
                         stream.write(ruleData.getData());
                         stream.close();

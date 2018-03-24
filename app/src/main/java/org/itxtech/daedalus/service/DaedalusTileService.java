@@ -4,11 +4,11 @@ import android.os.Build;
 import android.service.quicksettings.Tile;
 import android.service.quicksettings.TileService;
 import android.support.annotation.RequiresApi;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author pcqpcq & iTX Technologies
  * @link https://itxtech.org
@@ -26,7 +26,7 @@ public class DaedalusTileService extends TileService {
         Tile tile = getQsTile();
         tile.setLabel(getString(R.string.quick_toggle));
         tile.setContentDescription(getString(R.string.app_name));
-        tile.setState(Daedalus.switchService() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
+        tile.setState(Liberatio.switchService() ? Tile.STATE_ACTIVE : Tile.STATE_INACTIVE);
         tile.updateTile();
     }
 

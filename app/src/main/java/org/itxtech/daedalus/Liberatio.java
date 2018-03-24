@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -42,7 +42,7 @@ import java.util.List;
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  */
-public class Daedalus extends Application {
+public class Liberatio extends Application {
     static {
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
@@ -89,7 +89,7 @@ public class Daedalus extends Application {
     public static String logPath = null;
     private static String configPath = null;
 
-    private static Daedalus instance = null;
+    private static Liberatio instance = null;
     private SharedPreferences prefs;
     private Thread mResolver;
 
@@ -144,7 +144,7 @@ public class Daedalus extends Application {
     }
 
     public static void initRuleResolver() {
-        if (Daedalus.getPrefs().getBoolean("settings_local_rules_resolution", false)) {
+        if (Liberatio.getPrefs().getBoolean("settings_local_rules_resolution", false)) {
             ArrayList<String> pendingLoad = new ArrayList<>();
             ArrayList<Rule> usingRules = configurations.getUsingRules();
             if (usingRules != null && usingRules.size() > 0) {
@@ -190,7 +190,7 @@ public class Daedalus extends Application {
 
     @Override
     public void onTerminate() {
-        Log.d("Daedalus", "onTerminate");
+        Log.d("Liberatio", "onTerminate");
         super.onTerminate();
 
         instance = null;
@@ -223,7 +223,7 @@ public class Daedalus extends Application {
         } else {
             DaedalusVpnService.primaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getPrimary());
             DaedalusVpnService.secondaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getSecondary());
-            context.startService(Daedalus.getServiceIntent(context).setAction(DaedalusVpnService.ACTION_ACTIVATE));
+            context.startService(Liberatio.getServiceIntent(context).setAction(DaedalusVpnService.ACTION_ACTIVATE));
             return true;
         }
     }
@@ -235,10 +235,10 @@ public class Daedalus extends Application {
 
     public static void updateShortcut(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
-            Log.d("Daedalus", "Updating shortcut");
+            Log.d("Liberatio", "Updating shortcut");
             boolean activate = DaedalusVpnService.isActivated();
             String notice = activate ? context.getString(R.string.button_text_deactivate) : context.getString(R.string.button_text_activate);
-            ShortcutInfo info = new ShortcutInfo.Builder(context, Daedalus.SHORTCUT_ID_ACTIVATE)
+            ShortcutInfo info = new ShortcutInfo.Builder(context, Liberatio.SHORTCUT_ID_ACTIVATE)
                     .setLongLabel(notice)
                     .setShortLabel(notice)
                     .setIcon(Icon.createWithResource(context, R.mipmap.ic_launcher))
@@ -263,7 +263,7 @@ public class Daedalus extends Application {
         }
     }
 
-    public static Daedalus getInstance() {
+    public static Liberatio getInstance() {
         return instance;
     }
 }

@@ -12,7 +12,7 @@ import android.os.ParcelFileDescriptor;
 import android.support.v4.app.NotificationCompat;
 import android.system.OsConstants;
 import android.util.Log;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.MainActivity;
 import org.itxtech.daedalus.provider.Provider;
@@ -30,7 +30,7 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -80,7 +80,7 @@ public class DaedalusVpnService extends VpnService implements Runnable {
             switch (intent.getAction()) {
                 case ACTION_ACTIVATE:
                     activated = true;
-                    if (Daedalus.getPrefs().getBoolean("settings_notification", true)) {
+                    if (Liberatio.getPrefs().getBoolean("settings_notification", true)) {
 
                         NotificationManager manager = (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -111,7 +111,7 @@ public class DaedalusVpnService extends VpnService implements Runnable {
                         this.notification = builder;
                     }
 
-                    Daedalus.initRuleResolver();
+                    Liberatio.initRuleResolver();
                     DNSServerHelper.buildPortCache();
 
                     if (this.mThread == null) {
@@ -119,7 +119,7 @@ public class DaedalusVpnService extends VpnService implements Runnable {
                         this.running = true;
                         this.mThread.start();
                     }
-                    Daedalus.updateShortcut(getApplicationContext());
+                    Liberatio.updateShortcut(getApplicationContext());
                     if (MainActivity.getInstance() != null) {
                         MainActivity.getInstance().startActivity(new Intent(getApplicationContext(), MainActivity.class)
                                 .putExtra(MainActivity.LAUNCH_ACTION, MainActivity.LAUNCH_ACTION_SERVICE_DONE));
@@ -174,14 +174,14 @@ public class DaedalusVpnService extends VpnService implements Runnable {
         if (shouldRefresh) {
             RuleResolver.clear();
             DNSServerHelper.clearPortCache();
-            Logger.info("Daedalus VPN service has stopped");
+            Logger.info("Liberatio VPN service has stopped");
         }
 
         if (shouldRefresh && MainActivity.getInstance() != null) {
             MainActivity.getInstance().startActivity(new Intent(getApplicationContext(), MainActivity.class)
                     .putExtra(MainActivity.LAUNCH_ACTION, MainActivity.LAUNCH_ACTION_SERVICE_DONE));
         } else if (shouldRefresh) {
-            Daedalus.updateShortcut(getApplicationContext());
+            Liberatio.updateShortcut(getApplicationContext());
         }
     }
 
@@ -214,7 +214,7 @@ public class DaedalusVpnService extends VpnService implements Runnable {
     public void run() {
         try {
             Builder builder = new Builder()
-                    .setSession("Daedalus")
+                    .setSession("Liberatio")
                     .setConfigureIntent(PendingIntent.getActivity(this, 0,
                             new Intent(this, MainActivity.class).putExtra(MainActivity.LAUNCH_FRAGMENT, MainActivity.FRAGMENT_SETTINGS),
                             PendingIntent.FLAG_ONE_SHOT));
@@ -230,8 +230,8 @@ public class DaedalusVpnService extends VpnService implements Runnable {
                 break;
             }
 
-            boolean advanced = Daedalus.getPrefs().getBoolean("settings_advanced_switch", false);
-            statisticQuery = Daedalus.getPrefs().getBoolean("settings_count_query_times", false);
+            boolean advanced = Liberatio.getPrefs().getBoolean("settings_advanced_switch", false);
+            statisticQuery = Liberatio.getPrefs().getBoolean("settings_count_query_times", false);
             byte[] ipv6Template = new byte[]{32, 1, 13, (byte) (184 & 0xFF), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
             if (primaryServer.contains(":") || secondaryServer.contains(":")) {//IPv6
@@ -261,8 +261,8 @@ public class DaedalusVpnService extends VpnService implements Runnable {
 
             InetAddress primaryDNSServer = aliasPrimary;
             InetAddress secondaryDNSServer = aliasSecondary;
-            Logger.info("Daedalus VPN service is listening on " + primaryServer + " as " + primaryDNSServer.getHostAddress());
-            Logger.info("Daedalus VPN service is listening on " + secondaryServer + " as " + secondaryDNSServer.getHostAddress());
+            Logger.info("Liberatio VPN service is listening on " + primaryServer + " as " + primaryDNSServer.getHostAddress());
+            Logger.info("Liberatio VPN service is listening on " + secondaryServer + " as " + secondaryDNSServer.getHostAddress());
             builder.addDnsServer(primaryDNSServer).addDnsServer(secondaryDNSServer);
 
             if (advanced) {
@@ -272,10 +272,10 @@ public class DaedalusVpnService extends VpnService implements Runnable {
             }
 
             descriptor = builder.establish();
-            Logger.info("Daedalus VPN service is started");
+            Logger.info("Liberatio VPN service is started");
 
             if (advanced) {
-                if (Daedalus.getPrefs().getBoolean("settings_dns_over_tcp", false)) {
+                if (Liberatio.getPrefs().getBoolean("settings_dns_over_tcp", false)) {
                     provider = new TcpProvider(descriptor, this);
                 } else {
                     provider = new UdpProvider(descriptor, this);

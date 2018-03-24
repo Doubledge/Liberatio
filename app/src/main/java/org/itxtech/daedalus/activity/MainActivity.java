@@ -19,9 +19,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import org.itxtech.daedalus.BuildConfig;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.fragment.*;
 import org.itxtech.daedalus.service.DaedalusVpnService;
@@ -29,7 +30,7 @@ import org.itxtech.daedalus.util.Logger;
 import org.itxtech.daedalus.util.server.DNSServerHelper;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (Daedalus.isDarkTheme()) {
+        if (Liberatio.isDarkTheme()) {
             setTheme(R.style.AppTheme_Dark_NoActionBar);
         }
         super.onCreate(savedInstanceState);
@@ -136,19 +137,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void activateService() {
-        Intent intent = VpnService.prepare(Daedalus.getInstance());
+        Intent intent = VpnService.prepare(Liberatio.getInstance());
         if (intent != null) {
             startActivityForResult(intent, 0);
         } else {
             onActivityResult(0, Activity.RESULT_OK, null);
         }
 
-        long activateCounter = Daedalus.configurations.getActivateCounter();
+        long activateCounter = Liberatio.configurations.getActivateCounter();
         if (activateCounter == -1) {
             return;
         }
         activateCounter++;
-        Daedalus.configurations.setActivateCounter(activateCounter);
+        Liberatio.configurations.setActivateCounter(activateCounter);
         if (activateCounter % 10 == 0) {
             new AlertDialog.Builder(this)
                     .setTitle("觉得还不错？")
@@ -156,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setPositiveButton("为我买杯咖啡", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Daedalus.donate();
+                            Liberatio.donate();
                             new AlertDialog.Builder(MainActivity.this)
                                     .setMessage("感谢您的支持！;)\n我会再接再厉！")
                                     .setPositiveButton("确认", null)
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .setNeutralButton("不再显示", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Daedalus.configurations.setActivateCounter(-1);
+                            Liberatio.configurations.setActivateCounter(-1);
                         }
                     })
                     .setNegativeButton("取消", null)
@@ -178,16 +179,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (result == Activity.RESULT_OK) {
             DaedalusVpnService.primaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getPrimary());
             DaedalusVpnService.secondaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getSecondary());
-            Daedalus.getInstance().startService(Daedalus.getServiceIntent(getApplicationContext()).setAction(DaedalusVpnService.ACTION_ACTIVATE));
-            updateMainButton(R.string.button_text_deactivate);
-            Daedalus.updateShortcut(getApplicationContext());
+            Liberatio.getInstance().startService(Liberatio.getServiceIntent(getApplicationContext()).setAction(DaedalusVpnService.ACTION_ACTIVATE));
+            updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked);
+            Liberatio.updateShortcut(getApplicationContext());
         }
     }
 
-    private void updateMainButton(int id) {
+    private void updateMainButton(int textId, int imageId) {
         if (currentFragment instanceof HomeFragment) {
             Button button = currentFragment.getView().findViewById(R.id.button_activate);
-            button.setText(id);
+            ImageView image = currentFragment.getView().findViewById(R.id.imageView_icon);
+            button.setText(textId);
+            image.setImageDrawable(getDrawable(imageId));
+
         }
     }
 
@@ -197,13 +201,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (launchAction == LAUNCH_ACTION_ACTIVATE) {
             this.activateService();
         } else if (launchAction == LAUNCH_ACTION_DEACTIVATE) {
-            Daedalus.deactivateService(getApplicationContext());
+            Liberatio.deactivateService(getApplicationContext());
         } else if (launchAction == LAUNCH_ACTION_SERVICE_DONE) {
-            Daedalus.updateShortcut(getApplicationContext());
+            Liberatio.updateShortcut(getApplicationContext());
             if (DaedalusVpnService.isActivated()) {
-                updateMainButton(R.string.button_text_deactivate);
+                updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked);
             } else {
-                updateMainButton(R.string.button_text_activate);
+                updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked);
             }
         }
 
@@ -265,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switchFragment(DNSTestFragment.class);
                 break;
             case R.id.nav_github:
-                Daedalus.openUri("https://github.com/iTXTech/Daedalus");
+                Liberatio.openUri("https://github.com/iTXTech/Liberatio");
                 break;
             case R.id.nav_home:
                 switchFragment(HomeFragment.class);
@@ -284,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
-        InputMethodManager imm = (InputMethodManager) Daedalus.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) Liberatio.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(findViewById(R.id.id_content).getWindowToken(), 0);
         return true;
     }

@@ -3,11 +3,11 @@ package org.itxtech.daedalus.receiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.util.Logger;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -20,8 +20,8 @@ import org.itxtech.daedalus.util.Logger;
 public class BootBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (Daedalus.getPrefs().getBoolean("settings_boot", false)) {
-            Daedalus.activateService(context);
+        if (Liberatio.getPrefs().getBoolean("settings_boot", false)) {
+            Liberatio.activateService(context);
             Logger.info("Triggered boot receiver");
         }
     }

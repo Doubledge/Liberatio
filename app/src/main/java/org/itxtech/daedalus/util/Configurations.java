@@ -2,7 +2,7 @@ package org.itxtech.daedalus.util;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.util.server.CustomDNSServer;
 
 import java.io.File;
@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -121,7 +121,7 @@ public class Configurations {
         Configurations config = null;
         if (file.exists()) {
             try {
-                config = Daedalus.parseJson(Configurations.class, new JsonReader(new FileReader(file)));
+                config = Liberatio.parseJson(Configurations.class, new JsonReader(new FileReader(file)));
                 Logger.info("Load configuration successfully from " + file);
             } catch (Exception e) {
                 Logger.logException(e);

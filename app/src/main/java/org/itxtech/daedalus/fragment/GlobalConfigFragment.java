@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.preference.*;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-import org.itxtech.daedalus.Daedalus;
+import org.itxtech.daedalus.Liberatio;
 import org.itxtech.daedalus.R;
 import org.itxtech.daedalus.activity.MainActivity;
 import org.itxtech.daedalus.util.server.DNSServerHelper;
 
 /**
- * Daedalus Project
+ * Liberatio Project
  *
  * @author iTX Technologies
  * @link https://itxtech.org
@@ -28,7 +28,7 @@ public class GlobalConfigFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Daedalus.getPrefs().edit()
+        Liberatio.getPrefs().edit()
                 .putString("primary_server", DNSServerHelper.getPrimary())
                 .putString("secondary_server", DNSServerHelper.getSecondary())
                 .apply();
@@ -36,13 +36,13 @@ public class GlobalConfigFragment extends PreferenceFragment {
         addPreferencesFromResource(R.xml.perf_settings);
 
         ListPreference primaryServer = (ListPreference) findPreference("primary_server");
-        primaryServer.setEntries(DNSServerHelper.getNames(Daedalus.getInstance()));
+        primaryServer.setEntries(DNSServerHelper.getNames(Liberatio.getInstance()));
         primaryServer.setEntryValues(DNSServerHelper.getIds());
-        primaryServer.setSummary(DNSServerHelper.getDescription(primaryServer.getValue(), Daedalus.getInstance()));
+        primaryServer.setSummary(DNSServerHelper.getDescription(primaryServer.getValue(), Liberatio.getInstance()));
         primaryServer.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(DNSServerHelper.getDescription((String) newValue, Daedalus.getInstance()));
+                preference.setSummary(DNSServerHelper.getDescription((String) newValue, Liberatio.getInstance()));
                 /*Snackbar.make(getView(), R.string.notice_need_restart, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 return true;
@@ -50,13 +50,13 @@ public class GlobalConfigFragment extends PreferenceFragment {
         });
 
         ListPreference secondaryServer = (ListPreference) findPreference("secondary_server");
-        secondaryServer.setEntries(DNSServerHelper.getNames(Daedalus.getInstance()));
+        secondaryServer.setEntries(DNSServerHelper.getNames(Liberatio.getInstance()));
         secondaryServer.setEntryValues(DNSServerHelper.getIds());
-        secondaryServer.setSummary(DNSServerHelper.getDescription(secondaryServer.getValue(), Daedalus.getInstance()));
+        secondaryServer.setSummary(DNSServerHelper.getDescription(secondaryServer.getValue(), Liberatio.getInstance()));
         secondaryServer.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object newValue) {
-                preference.setSummary(DNSServerHelper.getDescription((String) newValue, Daedalus.getInstance()));
+                preference.setSummary(DNSServerHelper.getDescription((String) newValue, Liberatio.getInstance()));
                 /*Snackbar.make(getView(), R.string.notice_need_restart, Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();*/
                 return true;
@@ -87,7 +87,7 @@ public class GlobalConfigFragment extends PreferenceFragment {
         darkTheme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
-                getActivity().startActivity(new Intent(Daedalus.getInstance(), MainActivity.class)
+                getActivity().startActivity(new Intent(Liberatio.getInstance(), MainActivity.class)
                         .putExtra(MainActivity.LAUNCH_FRAGMENT, MainActivity.FRAGMENT_SETTINGS)
                         .putExtra(MainActivity.LAUNCH_NEED_RECREATE, true));
                 return true;
@@ -115,7 +115,7 @@ public class GlobalConfigFragment extends PreferenceFragment {
         findPreference("settings_check_update").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Daedalus.openUri("https://github.com/iTXTech/Daedalus/releases");
+                Liberatio.openUri("https://github.com/iTXTech/Liberatio/releases");
                 return false;
             }
         });
@@ -123,7 +123,7 @@ public class GlobalConfigFragment extends PreferenceFragment {
         findPreference("settings_issue_tracker").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Daedalus.openUri("https://github.com/iTXTech/Daedalus/issues");
+                Liberatio.openUri("https://github.com/iTXTech/Liberatio/issues");
                 return false;
             }
         });
@@ -131,7 +131,7 @@ public class GlobalConfigFragment extends PreferenceFragment {
         findPreference("settings_manual").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Daedalus.openUri("https://github.com/iTXTech/Daedalus/wiki");
+                Liberatio.openUri("https://github.com/iTXTech/Liberatio/wiki");
                 return false;
             }
         });
