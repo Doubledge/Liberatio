@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    /** Update's the current fragment's: button, image, description, background
+    /** Updates the current fragment's: button, image, description, background
      *
      * @param textId string resource ID for new button text
      * @param imageId image resource ID for new image
