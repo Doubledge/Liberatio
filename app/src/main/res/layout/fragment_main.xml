@@ -25,18 +25,19 @@
             app:layout_marginTopPercent="20%"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"/>
+
     <TextView
-            android:text="My Name Jeff"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/cardview_light_background"
-            app:layout_marginTopPercent="5%"
-            android:layout_below="@id/imageView_icon"
-            android:textAppearance="@android:style/TextAppearance.DeviceDefault"
-            android:fontFamily="sans-serif"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/textView_app_name"/>
+        android:id="@+id/textView_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageView_icon"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif"
+        android:text="Liberatio"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="30sp"
+        app:layout_marginTopPercent="5%" />
 
     <TextView
         android:id="@+id/textView_notice"
