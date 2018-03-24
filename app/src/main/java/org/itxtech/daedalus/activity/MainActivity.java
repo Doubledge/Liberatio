@@ -144,13 +144,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             onActivityResult(0, Activity.RESULT_OK, null);
         }
-
-        long activateCounter = Liberatio.configurations.getActivateCounter();
-        if (activateCounter == -1) {
-            return;
-        }
-        activateCounter++;
-        Liberatio.configurations.setActivateCounter(activateCounter);
     }
 
     public void onActivityResult(int request, int result, Intent data) {
