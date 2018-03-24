@@ -41,7 +41,8 @@
             app:layout_marginTopPercent="5%"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault"
             android:fontFamily="sans-serif"
-            android:layout_below="@+id/textView_app_name" android:layout_centerHorizontal="true"/>
+            android:layout_below="@+id/textView_app_name"
+            android:layout_centerHorizontal="true"/>
     <Button
             android:text="@string/button_text_activate"
             android:textSize="15sp"
@@ -49,5 +50,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/button_activate"
             app:layout_marginTopPercent="10%"
-            android:layout_alignTop="@+id/textView_notice" android:layout_centerHorizontal="true"/>
+            android:layout_alignTop="@+id/textView_notice"
+            android:layout_centerHorizontal="true"/>
 </android.support.percent.PercentRelativeLayout>
