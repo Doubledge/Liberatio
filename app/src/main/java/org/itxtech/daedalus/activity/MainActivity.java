@@ -163,6 +163,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    /** updates the button's text, the image and the current Fragment's background
+     *
+     * @param textId string resource ID for the button's new text
+     * @param imageId image resource ID for the new image
+     * @param background image resource ID for the new background
+     */
     private void updateMainButton(int textId, int imageId, int background) {
         if (currentFragment instanceof HomeFragment) {
             Button button = currentFragment.getView().findViewById(R.id.button_activate);
@@ -184,8 +190,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (launchAction == LAUNCH_ACTION_SERVICE_DONE) {
             Liberatio.updateShortcut(getApplicationContext());
             if (DaedalusVpnService.isActivated()) {
+                // show unlocked
                 updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor);
             } else {
+                // Service not activated. Show locked.
                 updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked, R.drawable.bars2);
             }
         }
