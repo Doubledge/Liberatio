@@ -158,25 +158,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DaedalusVpnService.primaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getPrimary());
             DaedalusVpnService.secondaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getSecondary());
             Liberatio.getInstance().startService(Liberatio.getServiceIntent(getApplicationContext()).setAction(DaedalusVpnService.ACTION_ACTIVATE));
-            updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor);
+            updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
             Liberatio.updateShortcut(getApplicationContext());
         }
     }
 
-    /** updates the button's text, the image and the current Fragment's background
-     *
-     * @param textId string resource ID for the button's new text
-     * @param imageId image resource ID for the new image
-     * @param background image resource ID for the new background
-     */
-    private void updateMainButton(int textId, int imageId, int background) {
+    private void updateMainButton(int textId, int imageId, int background, int string) {
         if (currentFragment instanceof HomeFragment) {
             Button button = currentFragment.getView().findViewById(R.id.button_activate);
             ImageView image = currentFragment.getView().findViewById(R.id.imageView_icon);
+            TextView description = currentFragment.getView().findViewById(R.id.textView_notice);
             currentFragment.getView().setBackground(getDrawable(background));
             button.setText(textId);
             image.setImageDrawable(getDrawable(imageId));
-
+            description.setText(string);
         }
     }
 
@@ -191,10 +186,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Liberatio.updateShortcut(getApplicationContext());
             if (DaedalusVpnService.isActivated()) {
                 // show unlocked
-                updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor);
+                updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
             } else {
                 // Service not activated. Show locked.
-                updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked, R.drawable.bars2);
+                updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked, R.drawable.bars2, R.string.locked);
             }
         }
 

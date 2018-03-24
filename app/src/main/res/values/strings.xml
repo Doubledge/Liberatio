@@ -96,6 +96,8 @@
     <string name="test_failed">DNS query failed. Timeout or unknown hostname.</string>
     <string name="test_test_domain">google.com</string>
 
+    <string name="locked">Liberate Yourself by Bypassing Restrictions</string>
+    <string name="unlocked">Congratulations! You\'ve Been Liberated!</string>
     <string name="nav_version">Version:</string>
     <string name="nav_git_commit">Git commit:</string>
     <string name="nav_github">GitHub</string>

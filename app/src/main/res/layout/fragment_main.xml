@@ -46,20 +46,22 @@
         android:layout_below="@+id/textView_app_name"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif"
-        android:text="Liberate yourself by bypassing restrictions"
+        android:text="@string/locked"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault"
         android:textColor="@color/cardview_light_background"
         app:layout_marginTopPercent="5%" />
+
     <Button
-            android:text="@string/button_text_activate"
-            android:textSize="15sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_light"
-            android:id="@+id/button_activate"
-            app:layout_marginTopPercent="10%"
-            android:layout_alignTop="@+id/textView_notice"
-            android:layout_centerHorizontal="true"
+        android:id="@+id/button_activate"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView_notice"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:padding="10dp"
+        android:text="@string/button_text_activate"
+        android:textSize="15sp"
+        app:layout_marginTopPercent="10%"
 
         />
 </android.support.percent.PercentRelativeLayout>
