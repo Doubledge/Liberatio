@@ -158,11 +158,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             DaedalusVpnService.primaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getPrimary());
             DaedalusVpnService.secondaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getSecondary());
             Liberatio.getInstance().startService(Liberatio.getServiceIntent(getApplicationContext()).setAction(DaedalusVpnService.ACTION_ACTIVATE));
+            // update UI to show things unlocked
             updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
             Liberatio.updateShortcut(getApplicationContext());
         }
     }
 
+    /** Update's the current fragment's: button, image, description, background
+     *
+     * @param textId string resource ID for new button text
+     * @param imageId image resource ID for new image
+     * @param background image resource ID for new background
+     * @param string string resource ID for description's new text
+     */
     private void updateMainButton(int textId, int imageId, int background, int string) {
         if (currentFragment instanceof HomeFragment) {
             Button button = currentFragment.getView().findViewById(R.id.button_activate);
@@ -185,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (launchAction == LAUNCH_ACTION_SERVICE_DONE) {
             Liberatio.updateShortcut(getApplicationContext());
             if (DaedalusVpnService.isActivated()) {
-                // show unlocked
+                // show unlocked when VPN service is activated
                 updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
             } else {
                 // Service not activated. Show locked.
