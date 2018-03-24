@@ -46,7 +46,7 @@
         android:layout_below="@+id/textView_app_name"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif"
-        android:text="Liberate yourself by bypassing restrictions"
+        android:text="@string/locked"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault"
         android:textColor="@color/cardview_light_background"
         app:layout_marginTopPercent="5%" />
@@ -58,6 +58,7 @@
             android:background="@android:color/holo_orange_light"
             android:id="@+id/button_activate"
             app:layout_marginTopPercent="10%"
+            android:padding="10dp"
             android:layout_alignTop="@+id/textView_notice"
             android:layout_centerHorizontal="true"
 
