@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switchFragment(DNSTestFragment.class);
                 break;
             case R.id.nav_github:
-                Liberatio.openUri("https://github.com/iTXTech/Liberatio");
+                Liberatio.openUri("https://github.com/Doubledge/My-Name-Jeff");
                 break;
             case R.id.nav_home:
                 switchFragment(HomeFragment.class);
