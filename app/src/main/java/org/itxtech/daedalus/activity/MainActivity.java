@@ -151,29 +151,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         activateCounter++;
         Liberatio.configurations.setActivateCounter(activateCounter);
-        if (activateCounter % 10 == 0) {
-            new AlertDialog.Builder(this)
-                    .setTitle("觉得还不错？")
-                    .setMessage("您的支持是我动力来源！\n请考虑为我买杯咖啡醒醒脑，甚至其他…… ;)")
-                    .setPositiveButton("为我买杯咖啡", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Liberatio.donate();
-                            new AlertDialog.Builder(MainActivity.this)
-                                    .setMessage("感谢您的支持！;)\n我会再接再厉！")
-                                    .setPositiveButton("确认", null)
-                                    .show();
-                        }
-                    })
-                    .setNeutralButton("不再显示", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Liberatio.configurations.setActivateCounter(-1);
-                        }
-                    })
-                    .setNegativeButton("取消", null)
-                    .show();
-        }
     }
 
     public void onActivityResult(int request, int result, Intent data) {

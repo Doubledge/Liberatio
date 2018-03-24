@@ -250,10 +250,6 @@ public class Liberatio extends Application {
         }
     }
 
-    public static void donate() {
-        openUri("https://qr.alipay.com/a6x07022gffiehykicipv1a");
-    }
-
     public static void openUri(String uri) {
         try {
             instance.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri))
