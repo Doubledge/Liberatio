@@ -26,9 +26,9 @@ abstract public class ToolbarFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        menu = ((NavigationView) getActivity().findViewById(R.id.nav_view)).getMenu();
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.getMenu().clear();
+//        menu = ((NavigationView) getActivity().findViewById(R.id.nav_view)).getMenu();
+//        toolbar = getActivity().findViewById(R.id.toolbar);
+//        toolbar.getMenu().clear();
         checkStatus();
     }
 
