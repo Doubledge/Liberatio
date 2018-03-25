@@ -33,6 +33,7 @@
     <!-- Coordinator Layout taken from app_bar_main.xml -->
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/id_content"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
