@@ -41,7 +41,7 @@ import org.itxtech.daedalus.util.server.DNSServerHelper;
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  */
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "DMainActivity";
 
     public static final String LAUNCH_ACTION = "org.itxtech.daedalus.activity.MainActivity.LAUNCH_ACTION";
@@ -80,20 +80,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         instance = this;
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar); //causes toolbar issues
 
-        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+//        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_nav_version)).setText(getString(R.string.nav_version) + " " + BuildConfig.VERSION_NAME);
-        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_nav_git_commit)).setText(getString(R.string.nav_git_commit) + " " + BuildConfig.GIT_COMMIT);
+//        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_nav_version)).setText(getString(R.string.nav_version) + " " + BuildConfig.VERSION_NAME);
+//        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.textView_nav_git_commit)).setText(getString(R.string.nav_git_commit) + " " + BuildConfig.GIT_COMMIT);
 
         updateUserInterface(getIntent());
     }
@@ -113,14 +113,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else if (!(currentFragment instanceof HomeFragment)) {
-            switchFragment(HomeFragment.class);
-        } else {
+//        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else if (!(currentFragment instanceof HomeFragment)) {
+//            switchFragment(HomeFragment.class);
+//        } else {
             super.onBackPressed();
-        }
+//        }
     }
 
     @Override
@@ -236,43 +236,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        switch (id) {
+//            case R.id.nav_about:
+//                switchFragment(AboutFragment.class);
+//                break;
+//            case R.id.nav_dns_server:
+//                switchFragment(DNSServersFragment.class);
+//                break;
+//            case R.id.nav_dns_test:
+//                switchFragment(DNSTestFragment.class);
+//                break;
+//            case R.id.nav_github:
+//                Liberatio.openUri("https://github.com/Doubledge/My-Name-Jeff");
+//                break;
+//            case R.id.nav_home:
+//                switchFragment(HomeFragment.class);
+//                break;
+//            case R.id.nav_rules:
+//                switchFragment(RulesFragment.class);
+//                break;
+//            case R.id.nav_settings:
+//                switchFragment(SettingsFragment.class);
+//                break;
+//            case R.id.nav_log:
+//                switchFragment(LogFragment.class);
+//                break;
+//        }
 
-        switch (id) {
-            case R.id.nav_about:
-                switchFragment(AboutFragment.class);
-                break;
-            case R.id.nav_dns_server:
-                switchFragment(DNSServersFragment.class);
-                break;
-            case R.id.nav_dns_test:
-                switchFragment(DNSTestFragment.class);
-                break;
-            case R.id.nav_github:
-                Liberatio.openUri("https://github.com/Doubledge/My-Name-Jeff");
-                break;
-            case R.id.nav_home:
-                switchFragment(HomeFragment.class);
-                break;
-            case R.id.nav_rules:
-                switchFragment(RulesFragment.class);
-                break;
-            case R.id.nav_settings:
-                switchFragment(SettingsFragment.class);
-                break;
-            case R.id.nav_log:
-                switchFragment(LogFragment.class);
-                break;
-        }
+//        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
 
-        DrawerLayout drawer = findViewById(R.id.main_drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-
-        InputMethodManager imm = (InputMethodManager) Liberatio.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(findViewById(R.id.id_content).getWindowToken(), 0);
-        return true;
-    }
+//        InputMethodManager imm = (InputMethodManager) Liberatio.getInstance().getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.hideSoftInputFromWindow(findViewById(R.id.id_content).getWindowToken(), 0);
+//        return true;
+//    }
 }

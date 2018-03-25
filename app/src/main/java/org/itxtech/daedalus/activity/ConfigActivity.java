@@ -56,19 +56,19 @@ public class ConfigActivity extends AppCompatActivity {
                 break;
         }
 
-        Toolbar toolbar = findViewById(R.id.toolbar_config);
+//        Toolbar toolbar = findViewById(R.id.toolbar_config);
         Drawable drawable = ContextCompat.getDrawable(this, R.drawable.ic_clear);
         Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
         DrawableCompat.setTint(wrappedDrawable, Color.WHITE);
-        toolbar.setNavigationIcon(drawable);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        toolbar.setOnMenuItemClickListener(fragment);
-        toolbar.inflateMenu(R.menu.custom_config);
+//        toolbar.setNavigationIcon(drawable);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
+//        toolbar.setOnMenuItemClickListener(fragment);
+//        toolbar.inflateMenu(R.menu.custom_config);
 
         FragmentManager manager = getFragmentManager();
         fragment.setIntent(getIntent());
@@ -81,17 +81,17 @@ public class ConfigActivity extends AppCompatActivity {
     public void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_config);
-        switch (getIntent().getIntExtra(LAUNCH_ACTION_FRAGMENT, LAUNCH_FRAGMENT_DNS_SERVER)) {
-            case LAUNCH_FRAGMENT_DNS_SERVER:
-                toolbar.setTitle(R.string.config_dns_server);
-                break;
-            case LAUNCH_FRAGMENT_RULE:
-                toolbar.setTitle(R.string.config_rule);
-                break;
-            default://should never reach this
-                break;
-        }
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_config);
+//        switch (getIntent().getIntExtra(LAUNCH_ACTION_FRAGMENT, LAUNCH_FRAGMENT_DNS_SERVER)) {
+//            case LAUNCH_FRAGMENT_DNS_SERVER:
+//                toolbar.setTitle(R.string.config_dns_server);
+//                break;
+//            case LAUNCH_FRAGMENT_RULE:
+//                toolbar.setTitle(R.string.config_rule);
+//                break;
+//            default://should never reach this
+//                break;
+//        }
     }
 
     @Override
