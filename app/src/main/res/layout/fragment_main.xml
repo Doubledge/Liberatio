@@ -16,7 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:scaleType="fitXY"
-        android:src="@drawable/bars2" />
+        android:src="@drawable/bars"/>
 
     <ImageView
             android:contentDescription="icon"
