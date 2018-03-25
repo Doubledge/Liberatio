@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.VpnService;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,8 +17,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -152,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             DaedalusVpnService.secondaryServer = DNSServerHelper.getAddressById(DNSServerHelper.getSecondary());
             Liberatio.getInstance().startService(Liberatio.getServiceIntent(getApplicationContext()).setAction(DaedalusVpnService.ACTION_ACTIVATE));
             // update UI to show things unlocked
-            updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
+            updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.string.unlocked, true);
             Liberatio.updateShortcut(getApplicationContext());
         }
     }
@@ -161,15 +164,29 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param textId string resource ID for new button text
      * @param imageId image resource ID for new image
-     * @param background image resource ID for new background
      * @param string string resource ID for description's new text
      */
-    private void updateMainButton(int textId, int imageId, int background, int string) {
+    private void updateMainButton(int textId, int imageId, int string, boolean animationOn) {
         if (currentFragment instanceof HomeFragment) {
+
             Button button = currentFragment.getView().findViewById(R.id.button_activate);
+            ImageView background = currentFragment.getView().findViewById(R.id.backgroundBars);
             ImageView image = currentFragment.getView().findViewById(R.id.imageView_icon);
             TextView description = currentFragment.getView().findViewById(R.id.textView_notice);
-            currentFragment.getView().setBackground(getDrawable(background));
+
+            ViewGroup barTransition = (ViewGroup) currentFragment.getView().findViewById(R.id.fragment_main);
+            TransitionManager.beginDelayedTransition(barTransition);
+
+            if (!animationOn) {
+                //currentFragment.getView().setBackgroundResource(R.drawable.loading_bar);
+                //AnimationDrawable barsAnimation = (AnimationDrawable) currentFragment.getView().getBackground();
+                //barsAnimation.start();
+                //background.setBackgroundResource(R.drawable.bars2);
+                background.setImageDrawable(getDrawable(R.drawable.bars));
+            } else {
+                background.setImageDrawable(getDrawable(R.color.BadassColor));
+            }
+
             button.setText(textId);
             image.setImageDrawable(getDrawable(imageId));
             description.setText(string);
@@ -187,10 +204,10 @@ public class MainActivity extends AppCompatActivity {
             Liberatio.updateShortcut(getApplicationContext());
             if (DaedalusVpnService.isActivated()) {
                 // show unlocked when VPN service is activated
-                updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.color.BadassColor, R.string.unlocked);
+                updateMainButton(R.string.button_text_deactivate, R.mipmap.ic_unlocked, R.string.unlocked, true);
             } else {
                 // Service not activated. Show locked.
-                updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked, R.drawable.bars2, R.string.locked);
+                updateMainButton(R.string.button_text_activate, R.mipmap.ic_locked, R.string.locked, false);
             }
         }
 
