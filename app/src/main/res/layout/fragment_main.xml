@@ -6,13 +6,18 @@
         android:id="@+id/fragment_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:background="@drawable/bars2"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="org.itxtech.daedalus.fragment.HomeFragment">
+
+    <ImageView
+        android:id="@+id/backgroundBars"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/bars2" />
+
     <ImageView
             android:contentDescription="icon"
             android:id="@+id/imageView_icon"
@@ -62,6 +67,6 @@
         android:text="@string/button_text_activate"
         android:textSize="15sp"
         app:layout_marginTopPercent="10%"
-
         />
+
 </android.support.percent.PercentRelativeLayout>
