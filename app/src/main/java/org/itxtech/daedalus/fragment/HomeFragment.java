@@ -47,8 +47,8 @@ public class HomeFragment extends ToolbarFragment {
 
     @Override
     public void checkStatus() {
-        menu.findItem(R.id.nav_home).setChecked(true);
-        toolbar.setTitle(R.string.action_home);
+//        menu.findItem(R.id.nav_home).setChecked(true);
+//        toolbar.setTitle(R.string.action_home);
         updateUserInterface();
     }
 
